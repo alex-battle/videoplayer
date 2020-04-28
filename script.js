@@ -24,12 +24,13 @@ function updatePlayIcon(){
 }
 // update progress & timestamp
 function updateProgress(){
-    return true
+console.log(video.duration)
+progress.value = (video.currentTime / video.duration) * 100
 }
 
-// set video time to go with the progress
+// set video time to go with the progress bar
 function setVideoProgress(){
-    return true
+    video.currentTime = (+progress.value * video.duration)/ 100
 }
 
 // stop video
@@ -43,14 +44,19 @@ function stopVideo(){
 
 // play video when stopped, stop the video when playing
 video.addEventListener('click', toggleVideoStatus)
+
 // switch icons
 video.addEventListener('pause', updatePlayIcon)
 video.addEventListener('play', updatePlayIcon)
+
 // as video plays its going to continuously call this function
 video.addEventListener('timeupdate', updateProgress)
+
 // play button 
 play.addEventListener('click', toggleVideoStatus)
+
 // stop button
 stop.addEventListener('click', stopVideo)
+
 // when slider changes it will call this and go to that point of the video
 progress.addEventListener('change', setVideoProgress)
